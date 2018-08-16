@@ -2,7 +2,7 @@ var express = require('express');
 
 // App setup
 var app = express();
-var server = app.listen(4000, function() {
+var server = app.listen(process.env.PORT || 4000, function() {
     console.log('listening to requests on port: 4000')
 });
 

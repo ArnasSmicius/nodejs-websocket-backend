@@ -3,8 +3,9 @@ var socket = require('socket.io');
 
 // App setup
 var app = express();
-var server = app.listen(process.env.PORT || 4000, function() {
-    console.log('listening to requests on port: 4000');
+var port = process.env.PORT || 4000
+var server = app.listen(port, function() {
+    console.log(`listening to requests on port: ${port}`);
 });
 
 // Static files
@@ -15,6 +16,11 @@ var io = socket(server)
 
 io.on('connection', function(socket) {
     console.log('made socket connection', socket.id)
-});
 
-// https://www.youtube.com/watch?v=KNqVpESuyQo&list=PL4cUxeGkcC9i4V-_ZVwLmOusj8YAUhj_9&index=4
+    socket.on('chat', function(data) {
+        console.log(data)
+        // io.sockets.emit('chat', data)
+        socket.broadcast.emit('chat', data)
+    })
+
+});

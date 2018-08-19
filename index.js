@@ -19,8 +19,8 @@ io.on('connection', function(socket) {
 
     socket.on('chat', function(data) {
         console.log(data)
-        // io.sockets.emit('chat', data)
-        socket.broadcast.emit('chat', data)
+        io.sockets.emit('chat', data)
+        // socket.broadcast.emit('chat', data)
     })
 
 });
